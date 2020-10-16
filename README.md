@@ -76,7 +76,7 @@ import { t } from "talkr";
 export default function MyComponent() {
 return (
   <>
-    <h1>{t("hello"}</h1>
+    <h1>{t("hello")}</h1>
 	<div>{t("feedback.success")}</div>
   </>
 );
@@ -95,7 +95,7 @@ import { t } from "talkr";
 export default function MyComponent() {
 return (
   <>
-    <h1>{t("user.describe.complex", {name:"joe", hobby: "coding"})</h1>
+    <h1>{t("user.describe.complex", {name:"joe", hobby: "coding"})}</h1>
   </>
 );
 }
@@ -104,7 +104,7 @@ return (
 #### PLURAL
 
 - To handle plural, just add a `count` property to the object
-- To make it work, you need to provide both a `default` and `plural` values in your JSON files.
+- To make it work, you need to provide both `default` and `plural` values to your JSON files.
 
 ```javascript
 import React, {useState} from "react";
@@ -114,13 +114,13 @@ export default function MyComponent() {
 const [count, setCount] = useState(0)
 return (
   <>
-	<h1>{t("message-count", {count: count})}</h1>
-	<button onClick={()=> setCount(count + 1)>+1</button>
+	<h1>{t("message-count", {count})}</h1>
+	<button onClick={()=> setCount(count + 1)}>+1</button>
   </>
 );
 }
 ```
-
+#### LOCALE
 - Access and update the locale by using the hook `useLocale()`
 - If the provided locale doesn't match any JSON translation files, **Talkr** will use the `defaultLanguage` sent to the provider.
 
@@ -132,9 +132,9 @@ export default function MyComponent() {
 const {setLocale, locale} = useLocale()
 return (
   <>
-	<h1>{t("hello"}</h1>
+	<h1>{t("hello")}</h1>
 	<p>{locale}</p>
-	<button onClick={()=> setLocale("fr")>speak french</button>
+	<button onClick={()=> setLocale("fr")}>speak french</button>
   </>
 );
 }
@@ -148,7 +148,7 @@ You can pass these props to **Talkr**'s provider
 | |Type |Role |
 |----------------|-------------------------------|-----------------------------|
 |languages |`object` |object containing all your json files. Typical format: `{en: {...}, fr: {...}}` |
-|defaultLanguage |`string` |default language of your app (a similar key must be included in the `language` prop |
+|defaultLanguage |`string` |default language of your app (a similar key must be included in the `language` prop) |
 |detectBrowserLanguage |`boolean`|if `true`, **Talkr** will automatically use browser language and override the `defaultLanguage`. If the browser language is not included in your available translations, it will switch back to `defaultLanguage`.|
 
 > 🤓: The auto-detect language feature will always return a simple key such as 'fr' instead of 'fr_FR'. Keep things simple and always declare your languages with 2 letters.

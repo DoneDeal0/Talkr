@@ -56,10 +56,11 @@ export function t(
   const currentLocale = !languages[locale] ? defaultLanguage : locale;
   let result = languages[currentLocale] as TalkrProps["languages"];
   let currentKey = key;
-  if (params && params.count) {
+  if (params && Object.keys(params).includes("count")) {
+    //@ts-ignore
     currentKey = params.count > 1 ? `${key}.plural` : `${key}.default`;
   }
-  currentKey.split(".").forEach((k:string) => {
+  currentKey.split(".").forEach((k: string) => {
     if (!result[k]) return;
     return (result = result[k]);
   });

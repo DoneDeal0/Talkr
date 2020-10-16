@@ -1,6 +1,6 @@
 {
   "name": "talkr",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Small and simple i18n provider for React applications",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -13,7 +13,7 @@
     "build": "rimraf dist && mkdirp dist && rollup -c",
     "test": "echo \"No test specified\""
   },
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/DoneDeal0/Talkr"
   },
