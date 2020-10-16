@@ -22,5 +22,5 @@ export interface TalkrContext {
     mainLanguage: string;
 }
 export declare function Talkr({ children, languages, mainLanguage }: TalkrProps): JSX.Element;
-export declare function t(key: TProps["key"], params: TProps["params"]): string | null;
+export declare function t(key: TProps["key"], params?: TProps["params"]): string | null;
 export declare function useLocale(): any;

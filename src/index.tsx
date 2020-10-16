@@ -37,6 +37,7 @@ export function t(
   key: TProps["key"],
   params?: TProps["params"]
 ): string | null {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { locale, languages, mainLanguage } = useContext<TalkrContext>(
     TalkrContext
   );
@@ -47,16 +48,12 @@ export function t(
     currentKey = params.count > 1 ? `${key}.plural` : `${key}.default`;
   }
   let result = languages[currentLocale];
-  useMemo(
-    () =>
-      currentKey.split(".").forEach((k) => {
-        //@ts-ignore
-        if (!result[k]) return;
-        //@ts-ignore
-        return (result = result[k]);
-      }),
-    []
-  );
+  currentKey.split(".").forEach((k) => {
+    //@ts-ignore
+    if (!result[k]) return;
+    //@ts-ignore
+    return (result = result[k]);
+  });
   if (typeof result !== "string") return null;
   const currentParams =
     params &&
