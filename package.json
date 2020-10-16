@@ -1,7 +1,7 @@
 {
   "name": "talkr",
-  "version": "1.0.4",
-  "description": "i18n manager",
+  "version": "1.0.5",
+  "description": "Small and simple i18n provider for React applications",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -13,6 +13,17 @@
     "build": "rimraf dist && mkdirp dist && rollup -c",
     "test": "echo \"No test specified\""
   },
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoneDeal0/Talkr"
+  },
+  "keywords": [
+    "i18n",
+    "react",
+    "react-context",
+    "translations",
+    "translation"
+  ],
   "peerDependencies": {
     "react": "^16.14.0",
     "react-dom": "^16.14.0"

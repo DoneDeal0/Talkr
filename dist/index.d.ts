@@ -4,7 +4,8 @@ export interface TalkrProps {
     languages: {
         [key: string]: {};
     };
-    mainLanguage?: string;
+    defaultLanguage: string;
+    detectBrowserLanguage?: boolean;
 }
 export interface TProps {
     key: string;
@@ -19,8 +20,8 @@ export interface TalkrContext {
     languages: {
         [key: string]: {};
     };
-    mainLanguage: string;
+    defaultLanguage: string;
 }
-export declare function Talkr({ children, languages, mainLanguage }: TalkrProps): JSX.Element;
+export declare function Talkr({ children, languages, defaultLanguage, detectBrowserLanguage, }: TalkrProps): JSX.Element;
 export declare function t(key: TProps["key"], params?: TProps["params"]): string | null;
-export declare function useLocale(): any;
+export declare function useLocale(): TalkrContext;

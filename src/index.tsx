@@ -59,7 +59,7 @@ export function t(
   if (params && params.count) {
     currentKey = params.count > 1 ? `${key}.plural` : `${key}.default`;
   }
-  currentKey.split(".").forEach((k) => {
+  currentKey.split(".").forEach((k:string) => {
     if (!result[k]) return;
     return (result = result[k]);
   });
