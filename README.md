@@ -25,22 +25,22 @@
 
 ```javascript
 {
-"hello": "hello",
+  "hello": "hello",
   "feedback": {
-	"error": "The connection failed",
-	"success": "The connection succedeed"
-},
+    "error": "The connection failed",
+    "success": "The connection succedeed"
+  },
   "user": {
-  "describe": {
-	"simple": "You are __name__",
-	"complex": "You are __name__ and you like __hobby__"
-	},
-},
+    "describe": {
+      "simple": "You are __name__",
+      "complex": "You are __name__ and you like __hobby__"
+    },
+  },
   "message-count": {
-  "zero": "you don't have new messages",
-	"one": "you have 1 message",
-	"many": "you have __count__ messages"
-}
+    "zero": "you don't have new messages",
+    "one": "you have 1 message",
+    "many": "you have __count__ messages"
+  }
 }
 ```
 
