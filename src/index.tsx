@@ -58,7 +58,7 @@ export function t(
   let currentKey = key;
   if (params && Object.keys(params).includes("count")) {
     //@ts-ignore
-    currentKey = params.count > 1 ? `${key}.plural` : `${key}.default`;
+    currentKey = params.count === 0 ? `${key}.zero` : params.count === 1 ? `${key}.one` : `${key}.many`;
   }
   currentKey.split(".").forEach((k: string) => {
     if (!result[k]) return;

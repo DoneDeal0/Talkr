@@ -19,7 +19,7 @@
 
 - Create your JSON translation files.
 - Surround dynamic values by double underscores: `__dynamicValue__`.
-- To allow automatic plural detection, you will need to pass a `count` parameter to **Talkr**'s translation function. **Talkr** will then chose the right word or sentence between `default`or `plural`.
+- To allow automatic plural detection, you will need to pass a `count` parameter to **Talkr**'s translation function. **Talkr** will then chose the right word or sentence between `zero`or `one` and `many`.
 
 ```javascript
 {
@@ -35,8 +35,9 @@
 	},
 },
   "message-count": {
-	"default": "you have __count__ message",
-	"plural": "you have __count__ messages"
+  "zero": "you don't have new messages",
+	"one": "you have 1 message",
+	"many": "you have __count__ messages"
 }
 }
 ```
@@ -76,7 +77,7 @@ import { t } from "talkr";
 export default function MyComponent() {
 return (
   <>
-    <h1>{t("hello")}</h1>
+  <h1>{t("hello")}</h1>
 	<div>{t("feedback.success")}</div>
   </>
 );
@@ -95,7 +96,7 @@ import { t } from "talkr";
 export default function MyComponent() {
 return (
   <>
-    <h1>{t("user.describe.complex", {name:"joe", hobby: "coding"})}</h1>
+  <h1>{t("user.describe.complex", {name:"joe", hobby: "coding"})}</h1>
   </>
 );
 }
@@ -104,7 +105,7 @@ return (
 #### PLURAL
 
 - To handle plural, just add a `count` property to the object
-- To make it work, you need to provide both `default` and `plural` values to your JSON files.
+- To make it work, you need to provide both `zero`, `one` and `many` values to your JSON files.
 
 ```javascript
 import React, {useState} from "react";
