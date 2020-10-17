@@ -57,8 +57,9 @@ export function t(
   let result = languages[currentLocale] as TalkrProps["languages"];
   let currentKey = key;
   if (params && Object.keys(params).includes("count")) {
+    let plural = new Intl.PluralRules(currentLocale).select(params.count as number)
     //@ts-ignore
-    currentKey = params.count === 0 ? `${key}.zero` : params.count === 1 ? `${key}.one` : `${key}.many`;
+    currentKey = params.count === 0 ? `${key}.zero` : plural === "other" ? `${key}.many` : `${key}.${plural}`;
   }
   currentKey.split(".").forEach((k: string) => {
     if (!result[k]) return;

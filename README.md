@@ -9,7 +9,7 @@
 ### features:
 
 - auto-detect browser language
-- auto-detect plural
+- auto-detect plural rules based on any language
 - dynamic translations with multiple keys
 - access deeply nested keys in json translations files
 
@@ -19,7 +19,9 @@
 
 - Create your JSON translation files.
 - Surround dynamic values by double underscores: `__dynamicValue__`.
-- To allow automatic plural detection, you will need to pass a `count` parameter to **Talkr**'s translation function. **Talkr** will then chose the right word or sentence between `zero`or `one` and `many`.
+- To allow automatic plural detection, you will need to pass a `count` parameter to **Talkr**'s translation function. **Talkr** will then chose the right word or sentence between `zero`, `one`, `two`, `few` and `many`.
+
+> 🤓: Some languages have more complex plural rules, that may require these five options to offer a perfect user experience. For instance, Arabic handle `zero`, `one`, `two`, `numbers between 3 and 10` and `numbers over 10` as separate entities. If a language doesn't need all these subtleties - like english - you can only write `zero`, `one` and `many` in the JSON file. 
 
 ```javascript
 {
