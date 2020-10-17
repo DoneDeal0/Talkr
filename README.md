@@ -21,26 +21,26 @@
 - Surround dynamic values by double underscores: `__dynamicValue__`.
 - To allow automatic plural detection, you will need to pass a `count` parameter to **Talkr**'s translation function. **Talkr** will then chose the right word or sentence between `zero`, `one`, `two`, `few` and `many`.
 
-> 🤓: Some languages have more complex plural rules, that may require these five options to offer a perfect user experience. For instance, Arabic handle `zero`, `one`, `two`, `numbers between 3 and 10` and `numbers over 10` as separate entities. If a language doesn't need all these subtleties - like english - you can only write `zero`, `one` and `many` in the JSON file. 
+> 🤓: Some languages have more complex plural rules, that may require these five options to offer a perfect user experience. For instance, Arabic handle `zero`, `one`, `two`, `numbers between 3 and 10` and `numbers over 10` as separate entities. If a language doesn't need all these subtleties - like english - you can only write `zero`, `one` and `many` in the JSON file.
 
-```javascript
+```json
 {
-"hello": "hello",
+  "hello": "hello",
   "feedback": {
-	"error": "The connection failed",
-	"success": "The connection succedeed"
-},
+    "error": "The connection failed",
+    "success": "The connection succedeed"
+  },
   "user": {
-  "describe": {
-	"simple": "You are __name__",
-	"complex": "You are __name__ and you like __hobby__"
-	},
-},
+    "describe": {
+      "simple": "You are __name__",
+      "complex": "You are __name__ and you like __hobby__"
+    }
+  },
   "message-count": {
-  "zero": "you don't have new messages",
-	"one": "you have 1 message",
-	"many": "you have __count__ messages"
-}
+    "zero": "you don't have new messages",
+    "one": "you have 1 message",
+    "many": "you have __count__ messages"
+  }
 }
 ```
 
@@ -77,12 +77,12 @@ import React from "react";
 import { t } from "talkr";
 
 export default function MyComponent() {
-return (
-  <>
-  <h1>{t("hello")}</h1>
-	<div>{t("feedback.success")}</div>
-  </>
-);
+  return (
+    <>
+      <h1>{t("hello")}</h1>
+      <div>{t("feedback.success")}</div>
+    </>
+  );
 }
 ```
 
@@ -96,11 +96,11 @@ import React from "react";
 import { t } from "talkr";
 
 export default function MyComponent() {
-return (
-  <>
-  <h1>{t("user.describe.complex", {name:"joe", hobby: "coding"})}</h1>
-  </>
-);
+  return (
+    <>
+      <h1>{t("user.describe.complex", { name: "joe", hobby: "coding" })}</h1>
+    </>
+  );
 }
 ```
 
@@ -110,36 +110,38 @@ return (
 - To make it work, you need to provide both `zero`, `one` and `many` values to your JSON files.
 
 ```javascript
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { t } from "talkr";
 
 export default function MyComponent() {
-const [count, setCount] = useState(0)
-return (
-  <>
-	<h1>{t("message-count", {count})}</h1>
-	<button onClick={()=> setCount(count + 1)}>+1</button>
-  </>
-);
+  const [count, setCount] = useState(0);
+  return (
+    <>
+      <h1>{t("message-count", { count })}</h1>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </>
+  );
 }
 ```
+
 #### LOCALE
+
 - Access and update the locale by using the hook `useLocale()`
 - If the provided locale doesn't match any JSON translation files, **Talkr** will use the `defaultLanguage` sent to the provider.
 
 ```javascript
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { t, useLocale } from "talkr";
 
 export default function MyComponent() {
-const {setLocale, locale} = useLocale()
-return (
-  <>
-	<h1>{t("hello")}</h1>
-	<p>{locale}</p>
-	<button onClick={()=> setLocale("fr")}>speak french</button>
-  </>
-);
+  const { setLocale, locale } = useLocale();
+  return (
+    <>
+      <h1>{t("hello")}</h1>
+      <p>{locale}</p>
+      <button onClick={() => setLocale("fr")}>speak french</button>
+    </>
+  );
 }
 ```
 
@@ -162,7 +164,7 @@ You can access these props from **Talkr**'s hook `useLocale()`
 | |Type |Role |
 |----------------|-------------------------------|-----------------------------|
 |locale |`string` |returns the current locale |
-|setLocale |`(locale: string)=> void` |function to update the locale  
+|setLocale |`(locale: string) => void` |function to update the locale  
 |defaultLanguage |`string`|returns the App's default language|
 |languages |`object`|returns all your JSON translations|
 
