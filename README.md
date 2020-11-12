@@ -69,18 +69,18 @@ ReactDOM.render(
 
 #### SIMPLE USAGE
 
-- In any component, import **Talker**'s translation function `t`.
-- Fetch the desired sentence as if you were directly accessing an object, by adding `.` between each key. Based on the JSON example above, we could print the sentence `The connection succedeed` by simply writing `t("feedback.success")`
+- In any component, import **Talker**'s translation function `T`.
+- Fetch the desired sentence as if you were directly accessing an object, by adding `.` between each key. Based on the JSON example above, we could print the sentence `The connection succedeed` by simply writing `T("feedback.success")`
 
 ```javascript
 import React from "react";
-import { t } from "talkr";
+import { T } from "talkr";
 
 export default function MyComponent() {
   return (
     <>
-      <h1>{t("hello")}</h1>
-      <div>{t("feedback.success")}</div>
+      <h1>{T("hello")}</h1>
+      <div>{T("feedback.success")}</div>
     </>
   );
 }
@@ -93,12 +93,12 @@ export default function MyComponent() {
 
 ```javascript
 import React from "react";
-import { t } from "talkr";
+import { T } from "talkr";
 
 export default function MyComponent() {
   return (
     <>
-      <h1>{t("user.describe.complex", { name: "joe", hobby: "coding" })}</h1>
+      <h1>{T("user.describe.complex", { name: "joe", hobby: "coding" })}</h1>
     </>
   );
 }
@@ -111,13 +111,13 @@ export default function MyComponent() {
 
 ```javascript
 import React, { useState } from "react";
-import { t } from "talkr";
+import { T } from "talkr";
 
 export default function MyComponent() {
   const [count, setCount] = useState(0);
   return (
     <>
-      <h1>{t("message-count", { count })}</h1>
+      <h1>{T("message-count", { count })}</h1>
       <button onClick={() => setCount(count + 1)}>+1</button>
     </>
   );
@@ -131,13 +131,13 @@ export default function MyComponent() {
 
 ```javascript
 import React, { useState } from "react";
-import { t, useLocale } from "talkr";
+import { T, useLocale } from "talkr";
 
 export default function MyComponent() {
   const { setLocale, locale } = useLocale();
   return (
     <>
-      <h1>{t("hello")}</h1>
+      <h1>{T("hello")}</h1>
       <p>{locale}</p>
       <button onClick={() => setLocale("fr")}>speak french</button>
     </>

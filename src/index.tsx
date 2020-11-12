@@ -46,7 +46,7 @@ export function Talkr({
   );
 }
 
-export function t(
+export function T(
   key: TProps["key"],
   params?: TProps["params"]
 ): string | null {
