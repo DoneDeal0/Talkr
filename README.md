@@ -168,6 +168,20 @@ You can access these props from **Talkr**'s hook `useLocale()`
 |defaultLanguage |`string`|returns the App's default language|
 |languages |`object`|returns all your JSON translations|
 
+## SUPPORT
+
+Listen to Noir Empire (dark rock & trip-hop):
+
+https://www.facebook.com/Noir-Empire-101478985118273
+
+https://www.instagram.com/noir_empire/
+
+https://soundcloud.com/noir-empire
+
+https://www.youtube.com/channel/UCwUU5Qa-AWKiNTGmyfh1LdQ
+
+"The Way She Rocks" - Out November 13th, 2020.
+
 ## CREDITS
 
 DoneDeal0
