@@ -21,12 +21,7 @@ export interface TalkrContext {
 }
 
 const browserLanguage = typeof navigator !== 'undefined' ? navigator.language.split("-")[0] : null;
-const TalkrContext = createContext<TalkrContext>({
-  locale: "",
-  setLocale: () => null,
-  languages: {},
-  defaultLanguage: "",
-});
+const TalkrContext = createContext<TalkrContext | null>(null);
 
 export function Talkr({
   children,
@@ -50,9 +45,7 @@ export function T(
   key: TProps["key"],
   params?: TProps["params"]
 ): string | null {
-  const { locale, languages, defaultLanguage } = useContext<TalkrContext>(
-    TalkrContext
-  );
+  const { locale, languages, defaultLanguage } = useLocale();
   const currentLocale = !languages[locale] ? defaultLanguage : locale;
   let result = languages[currentLocale] as TalkrProps["languages"];
   let currentKey = key;
@@ -93,6 +86,10 @@ export function T(
     : result;
 }
 
-export function useLocale() {
-  return useContext(TalkrContext);
+export function useLocale(): TalkrContext {
+  const data = useContext(TalkrContext);
+  if (data == null) {
+    throw new Error('This should only be called inside Talkr');
+  }
+  return data;
 }
