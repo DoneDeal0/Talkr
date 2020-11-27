@@ -20,7 +20,7 @@ export interface TalkrContext {
   defaultLanguage: string;
 }
 
-const browserLanguage = navigator.language.split("-")[0];
+const browserLanguage = typeof navigator !== 'undefined' ? navigator.language.split("-")[0] : null;
 const TalkrContext = createContext<TalkrContext>({
   locale: "",
   setLocale: () => null,
@@ -35,7 +35,7 @@ export function Talkr({
   detectBrowserLanguage,
 }: TalkrProps) {
   const [locale, setLocale] = useState(
-    detectBrowserLanguage && navigator ? browserLanguage : defaultLanguage
+    detectBrowserLanguage && browserLanguage ? browserLanguage : defaultLanguage
   );
   return (
     <TalkrContext.Provider
