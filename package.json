@@ -1,6 +1,6 @@
 {
   "name": "talkr",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Small and simple i18n provider for React applications",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -35,17 +35,17 @@
   "author": "DoneDeal <talktonoirempire[@].gmail[.]com>",
   "license": "ISC",
   "devDependencies": {
-    "@types/react": "^16.9.52",
-    "@types/react-dom": "^16.9.8",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "mkdirp": "^1.0.4",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.30.0",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.27.3",
+    "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.0.3"
   }
 }
