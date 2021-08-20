@@ -1,6 +1,6 @@
 export interface TProps {
   children: React.ReactNode;
-  languages: { [key: string]: {} };
+  languages: Record<string, any>;
   defaultLanguage: string;
   detectBrowserLanguage?: boolean;
 }
@@ -8,7 +8,7 @@ export interface TProps {
 export interface TContext {
   locale: string;
   setLocale: (language: string) => void;
-  languages: { [key: string]: {} };
+  languages: Record<string, any>;
   defaultLanguage: string;
 }
 
@@ -19,7 +19,7 @@ export type KeyPath<T> = (
     ? {
         [K in Exclude<keyof T, symbol>]: `${K}${KeyPrefix<KeyPath<T[K]>>}`;
       }[Exclude<keyof T, symbol>]
-    : ""
+    : string
 ) extends infer D
   ? Extract<D, string>
   : never;

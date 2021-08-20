@@ -19,7 +19,6 @@ export function T(
     let plural = new Intl.PluralRules(currentLocale).select(
       params.count as number
     );
-    //@ts-ignore
     currentKey =
       params.count === 0
         ? `${key}.zero`
@@ -27,7 +26,6 @@ export function T(
         ? `${key}.many`
         : `${key}.${plural}`;
   }
-  //@ts-ignore
   currentKey.split(".").forEach((k: string) => {
     if (!result[k]) return;
     return (result = result[k]);
@@ -44,7 +42,6 @@ export function T(
     ) as TParams["params"]);
   return currentParams
     ? result
-        //@ts-ignore
         .split("__")
         .map((word: string) =>
           currentParams[word] ? currentParams[word] : word
