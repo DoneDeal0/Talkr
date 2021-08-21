@@ -1,6 +1,6 @@
 export interface TProps {
   children: React.ReactNode;
-  languages: { [key: string]: {} };
+  languages: Record<string, any>;
   defaultLanguage: string;
   detectBrowserLanguage?: boolean;
 }
@@ -8,7 +8,7 @@ export interface TProps {
 export interface TContext {
   locale: string;
   setLocale: (language: string) => void;
-  languages: { [key: string]: {} };
+  languages: Record<string, any>;
   defaultLanguage: string;
 }
 

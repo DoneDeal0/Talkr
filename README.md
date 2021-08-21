@@ -12,6 +12,7 @@
 - auto-detect plural rules based on any language
 - dynamic translations with multiple keys
 - access deeply nested keys in json translations files
+- provides typescript autocompletion
 
 ## NICE! BUT HOW DOES IT WORK?
 
@@ -74,9 +75,10 @@ ReactDOM.render(
 
 ```javascript
 import React from "react";
-import { T } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT()
   return (
     <>
       <h1>{T("hello")}</h1>
@@ -93,9 +95,10 @@ export default function MyComponent() {
 
 ```javascript
 import React from "react";
-import { T } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT()
   return (
     <>
       <h1>{T("user.describe.complex", { name: "joe", hobby: "coding" })}</h1>
@@ -111,9 +114,10 @@ export default function MyComponent() {
 
 ```javascript
 import React, { useState } from "react";
-import { T } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT()
   const [count, setCount] = useState(0);
   return (
     <>
@@ -131,9 +135,10 @@ export default function MyComponent() {
 
 ```javascript
 import React, { useState } from "react";
-import { T, useLocale } from "talkr";
+import { useT, useLocale } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT()
   const { setLocale, locale } = useLocale();
   return (
     <>

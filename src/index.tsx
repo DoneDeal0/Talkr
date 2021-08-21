@@ -1,8 +1,8 @@
 import * as React from "react";
 import { createContext, useState, useContext } from "react";
 import { initLocale } from "./initLocale";
-export { T } from "./t";
 import { TContext, TProps } from "./models";
+export { useT } from "./useT";
 
 export const TalkrContext = createContext<TContext>({
   locale: "",
