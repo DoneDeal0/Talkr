@@ -25,3 +25,5 @@ export type KeyPath<T> = (
   : never;
 
 export type TParams = { count?: number; [key: string]: any };
+
+export type Autocomplete<schema> = KeyPath<schema> | (string & {});
