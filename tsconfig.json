@@ -3,7 +3,7 @@
     "declaration": true,
     "declarationDir": "./dist",
     "jsx": "react",
-    "lib": ["es6", "dom"],
+    "lib": ["es2019", "dom"],
     "module": "esnext",
     "moduleResolution": "node",
     "noUnusedParameters": true,

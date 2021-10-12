@@ -4,7 +4,7 @@
 
 ## WHAT IS IT?
 
-**Talkr** is a super small i18n provider for React applications. It supports Typescript, has 0 dependencies, and is very easy to use.
+**Talkr** is a super small i18n provider for React applications. It supports Typescript, provides autocompletion, has 0 dependencies, and is very easy to use.
 
 ### features:
 
@@ -12,8 +12,10 @@
 - auto-detect plural rules based on any language
 - dynamic translations with multiple keys
 - access deeply nested keys in json translations files
+- <a href="#autocomplete">provides typescript autocompletion for your keys (🤘**NEW IN V3!**)</a>
 
 ## NICE! BUT HOW DOES IT WORK?
+
 
 #### JSON
 
@@ -140,6 +142,65 @@ export default function MyComponent() {
       <h1>{T("hello")}</h1>
       <p>{locale}</p>
       <button onClick={() => setLocale("fr")}>speak french</button>
+    </>
+  );
+}
+```
+<a name='autocomplete'></a>
+#### AUTOCOMPLETION (🤘NEW IN V3)
+*Autocompletion for translation keys is now available in typescript projects. Because each user has different needs and various computer power, autocompletion is optional and **doesn't create any breaking change** for existing users.* 
+
+- Create a `translate.ts` file anywhere in your app (`translate.ts` can be named as you want)
+- Import your main language JSON translation (ex: `en.json`)
+- Instantiate autocompletion with **Talkr's Autocomplete**
+- Export a wrapper `tr` around **Talkr's `T`** classic function. (`tr` can be named as you want)
+
+```javascript
+import { T, Autocomplete, TParams } from "talkr";
+import en from "./en.json";
+
+type Key = Autocomplete<typeof  en>;
+export const tr = (key: Key, params?: TParams) => T(key, params);
+```
+➡ You now have the choice between using your own `tr` function - which provides autocompletion - or using **Talkr's `T`** - which doesn't provide autocompletion - in your app. 
+
+> 🤓 Pro-tip: since you will need to import `tr` from `translate.ts`, it is highly recommended to add an alias `translate` to your builder's config and `tsconfig.json`. This will allow you to write `import { tr } from "translate"` instead of `import { tr } from "../../translate"`. 
+> 
+> **Exemples:**
+> webpack
+> ```
+> resolve: {
+>   extensions: [".ts", ".tsx", ".js", "jsx", ".json"],
+>   alias: {
+>       translate: path.resolve(__dirname, "src/translate/"),
+>  }
+>```
+> tsconfig
+> ```
+> { "compilerOptions": {
+>   "paths": {
+>   "translate/*": ["src/translate/*"]
+>   }
+> }}
+>````
+>for other bundlers, please refer to their respective documentations. 
+
+#### SIMPLE USAGE WITH AUTOCOMPLETION
+
+- In any component, import your own translation function `tr` (it can be named as you want).
+- Fetch the desired sentence as if you were directly accessing an object, by adding `.` between each key. Based on the JSON example above, we could print the sentence `The connection succedeed` by simply writing `T("feedback.success")`
+- **Talkr** will provide a list of suggested keys in real time. 
+
+```javascript
+import React from "react";
+import { tr } from "translation"; 
+// or import { tr } from "../../translation" if you don't use an alias :(
+
+export default function MyComponent() {
+  return (
+    <>
+      <h1>{tr("hello")}</h1>
+      <div>{tr("feedback.success")}</div>
     </>
   );
 }

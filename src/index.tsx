@@ -1,41 +1,25 @@
 import * as React from "react";
 import { createContext, useState, useContext } from "react";
+import { initLocale } from "./initLocale";
+import { TContext, TProps } from "./models";
+export { Autocomplete, TParams } from "./models";
+export { T } from "./t";
 
-export interface TalkrProps {
-  children: React.ReactNode;
-  languages: { [key: string]: {} };
-  defaultLanguage: string;
-  detectBrowserLanguage?: boolean;
-}
-
-export interface TProps {
-  key: string;
-  params?: { count?: number; [key: string]: any };
-}
-
-export interface TalkrContext {
-  locale: string;
-  setLocale: (language: string) => void;
-  languages: { [key: string]: {} };
-  defaultLanguage: string;
-}
-
-const browserLanguage = typeof navigator !== 'undefined' ? navigator.language.split("-")[0] : null;
-const TalkrContext = createContext<TalkrContext>({
+export const TalkrContext = createContext<TContext>({
   locale: "",
   setLocale: () => null,
   languages: {},
-  defaultLanguage: "",
+  defaultLanguage: ""
 });
 
 export function Talkr({
   children,
   languages,
   defaultLanguage,
-  detectBrowserLanguage,
-}: TalkrProps) {
+  detectBrowserLanguage
+}: TProps) {
   const [locale, setLocale] = useState(
-    detectBrowserLanguage && browserLanguage ? browserLanguage : defaultLanguage
+    initLocale(defaultLanguage, detectBrowserLanguage)
   );
   return (
     <TalkrContext.Provider
@@ -44,53 +28,6 @@ export function Talkr({
       {children}
     </TalkrContext.Provider>
   );
-}
-
-export function T(
-  key: TProps["key"],
-  params?: TProps["params"]
-): string | null {
-  const { locale, languages, defaultLanguage } = useContext<TalkrContext>(
-    TalkrContext
-  );
-  const currentLocale = !languages[locale] ? defaultLanguage : locale;
-  let result = languages[currentLocale] as TalkrProps["languages"];
-  let currentKey = key;
-  if (params && Object.keys(params).includes("count")) {
-    let plural = new Intl.PluralRules(currentLocale).select(
-      params.count as number
-    );
-    //@ts-ignore
-    currentKey =
-      params.count === 0
-        ? `${key}.zero`
-        : plural === "other"
-        ? `${key}.many`
-        : `${key}.${plural}`;
-  }
-  currentKey.split(".").forEach((k: string) => {
-    if (!result[k]) return;
-    return (result = result[k]);
-  });
-  if (typeof result !== "string") {
-    console.warn(`Talkr bot: Missing translation for ${key}`);
-    return null;
-  }
-  const currentParams =
-    params &&
-    (Object.entries(params).reduce(
-      (acc, cur) => ({ ...acc, [cur[0]]: cur[1].toString() }),
-      {}
-    ) as TProps["params"]);
-  return currentParams
-    ? result
-        //@ts-ignore
-        .split("__")
-        .map((word: string) =>
-          currentParams[word] ? currentParams[word] : word
-        )
-        .join("")
-    : result;
 }
 
 export function useLocale() {
