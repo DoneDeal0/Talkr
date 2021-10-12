@@ -1,6 +1,6 @@
 {
   "name": "talkr",
-  "version": "3.0.1",
+  "version": "3.0.3",
   "description": "Small and simple i18n provider for React applications",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
