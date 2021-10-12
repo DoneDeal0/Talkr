@@ -2,7 +2,7 @@ import * as React from "react";
 import { createContext, useState, useContext } from "react";
 import { initLocale } from "./initLocale";
 import { TContext, TProps } from "./models";
-export { Autocomplete, TParams } from "./models";
+export * from "./models";
 export { T } from "./t";
 
 export const TalkrContext = createContext<TContext>({

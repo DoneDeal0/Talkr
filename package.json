@@ -1,11 +1,12 @@
 {
   "name": "talkr",
-  "version": "3.0.3",
+  "version": "3.0.5",
   "description": "Small and simple i18n provider for React applications",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "declaration": true,
   "files": [
     "dist"
   ],
