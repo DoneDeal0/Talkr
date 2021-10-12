@@ -159,7 +159,7 @@ export default function MyComponent() {
 import { T, Autocomplete, TParams } from "talkr";
 import en from "./en.json";
 
-type Key = Autocomplete<typeof  en>;
+type Key = Autocomplete<typeof en>;
 export const tr = (key: Key, params?: TParams) => T(key, params);
 ```
 ➡ You now have the choice between using your own `tr` function - which provides autocompletion - or using **Talkr's `T`** - which doesn't provide autocompletion - in your app. 
@@ -188,7 +188,7 @@ export const tr = (key: Key, params?: TParams) => T(key, params);
 #### SIMPLE USAGE WITH AUTOCOMPLETION
 
 - In any component, import your own translation function `tr` (it can be named as you want).
-- Fetch the desired sentence as if you were directly accessing an object, by adding `.` between each key. Based on the JSON example above, we could print the sentence `The connection succedeed` by simply writing `T("feedback.success")`
+- Fetch the desired sentence as if you were directly accessing an object, by adding `.` between each key. Based on the JSON example above, we could print the sentence `The connection succedeed` by simply writing `tr("feedback.success")`
 - **Talkr** will provide a list of suggested keys in real time. 
 
 ```javascript
