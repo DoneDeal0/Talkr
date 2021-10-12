@@ -1,6 +1,6 @@
 {
   "name": "talkr",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "description": "Small and simple i18n provider for React applications",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -26,9 +26,10 @@
     "translations",
     "translation",
     "internationalization",
-    "l10n"
+    "l10n",
+    "talkr"
   ],
-  "author": "DoneDeal",
+  "author": "DoneDeal0",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^17.0.28",
