@@ -76,9 +76,10 @@ ReactDOM.render(
 
 ```javascript
 import React from "react";
-import { T } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT()
   return (
     <>
       <h1>{T("hello")}</h1>
@@ -95,9 +96,10 @@ export default function MyComponent() {
 
 ```javascript
 import React from "react";
-import { T } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT()
   return (
     <>
       <h1>{T("user.describe.complex", { name: "joe", hobby: "coding" })}</h1>
@@ -113,9 +115,10 @@ export default function MyComponent() {
 
 ```javascript
 import React, { useState } from "react";
-import { T } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT()
   const [count, setCount] = useState(0);
   return (
     <>
@@ -133,10 +136,10 @@ export default function MyComponent() {
 
 ```javascript
 import React, { useState } from "react";
-import { T, useLocale } from "talkr";
+import { useT, useLocale } from "talkr";
 
 export default function MyComponent() {
-  const { setLocale, locale } = useLocale();
+  const { T, setLocale, locale } = useT()
   return (
     <>
       <h1>{T("hello")}</h1>
@@ -156,11 +159,11 @@ export default function MyComponent() {
 - Export a wrapper `tr` around **Talkr's `T`** classic function. (`tr` can be named as you want)
 
 ```javascript
-import { T, Autocomplete, TParams } from "talkr";
+import { useT, Autocomplete, TParams } from "talkr";
 import en from "./en.json";
 
 type Key = Autocomplete<typeof en>;
-export const tr = (key: Key, params?: TParams) => T(key, params);
+export const tr = (key: Key, params?: TParams) => useT().T(key, params);
 ```
 ➡ You now have the choice between using your own `tr` function - which provides autocompletion - or using **Talkr's `T`** - which doesn't provide autocompletion - in your app. 
 

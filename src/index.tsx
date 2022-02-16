@@ -1,9 +1,9 @@
 import * as React from "react";
 import { createContext, useState, useContext } from "react";
 import { initLocale } from "./initLocale";
-import { TContext, TProps } from "./models";
+import { TContext, TParams, TProps } from "./models";
 export * from "./models";
-export { T } from "./t";
+import { tr } from "./tr";
 
 export const TalkrContext = createContext<TContext>({
   locale: "",
@@ -30,6 +30,11 @@ export function Talkr({
   );
 }
 
-export function useLocale() {
-  return useContext(TalkrContext);
+export function useT(){
+  const { locale, setLocale, languages, defaultLanguage } = useContext(TalkrContext);
+  return {
+      locale,
+      setLocale,
+      T: (key: string, params?: TParams)=> tr({ locale, languages, defaultLanguage }, key, params)
+}
 }

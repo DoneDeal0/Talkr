@@ -12,6 +12,12 @@ export interface TContext {
   defaultLanguage: string;
 }
 
+export type TrContext = {
+  locale: string, 
+  languages:Record<string, any>, 
+  defaultLanguage: string
+}
+
 type KeyPrefix<T extends string> = T extends "" ? "" : `.${T}`;
 
 export type KeyPath<T> = (
