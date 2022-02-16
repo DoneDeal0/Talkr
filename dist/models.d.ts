@@ -11,6 +11,7 @@ export interface TContext {
     languages: Record<string, any>;
     defaultLanguage: string;
 }
+export declare type TrContext = Omit<TContext, "setLocale">;
 declare type KeyPrefix<T extends string> = T extends "" ? "" : `.${T}`;
 export declare type KeyPath<T> = (T extends object ? {
     [K in Exclude<keyof T, symbol>]: `${K}${KeyPrefix<KeyPath<T[K]>>}`;
@@ -20,4 +21,7 @@ export declare type TParams = {
     [key: string]: any;
 };
 export declare type Autocomplete<schema> = KeyPath<schema> | (string & {});
+export interface UseT extends TContext {
+    T: <Key extends string, Params extends TParams>(key: Key, params?: Params) => React.ReactNode;
+}
 export {};

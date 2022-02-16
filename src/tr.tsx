@@ -1,12 +1,10 @@
-import { useContext } from "react";
-import { TalkrContext } from ".";
-import { TParams } from "./models";
+import { TParams, TrContext } from "./models";
 
-export function T<Key extends string, Params extends TParams>(
+export function tr<Key extends string, Params extends TParams>(
+  { locale, languages, defaultLanguage }: TrContext,
   key: Key,
   params?: Params
 ): string | null {
-  const { locale, languages, defaultLanguage } = useContext(TalkrContext);
   const currentLocale = !languages[locale] ? defaultLanguage : locale;
   let result = languages[currentLocale];
   let currentKey: string = key;

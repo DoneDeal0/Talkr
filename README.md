@@ -4,6 +4,8 @@
 
 ## WHAT IS IT?
 
+<img width="588" alt="talkr autocomplete in action" src="https://user-images.githubusercontent.com/43271780/154273252-f0818de8-66d1-4265-9e6f-bebe5bd8b73f.png">
+
 **Talkr** is a super small i18n provider for React applications. It supports Typescript, provides autocompletion, has 0 dependencies, and is very easy to use.
 
 ### features:
@@ -12,10 +14,9 @@
 - auto-detect plural rules based on any language
 - dynamic translations with multiple keys
 - access deeply nested keys in json translations files
-- <a href="#autocomplete">provides typescript autocompletion for your keys (🤘**NEW IN V3!**)</a>
+- provides typescript autocompletion for your keys (🤘)</a>
 
 ## NICE! BUT HOW DOES IT WORK?
-
 
 #### JSON
 
@@ -76,9 +77,10 @@ ReactDOM.render(
 
 ```javascript
 import React from "react";
-import { T } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT();
   return (
     <>
       <h1>{T("hello")}</h1>
@@ -95,9 +97,10 @@ export default function MyComponent() {
 
 ```javascript
 import React from "react";
-import { T } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT();
   return (
     <>
       <h1>{T("user.describe.complex", { name: "joe", hobby: "coding" })}</h1>
@@ -113,9 +116,10 @@ export default function MyComponent() {
 
 ```javascript
 import React, { useState } from "react";
-import { T } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
+  const { T } = useT();
   const [count, setCount] = useState(0);
   return (
     <>
@@ -128,15 +132,15 @@ export default function MyComponent() {
 
 #### LOCALE
 
-- Access and update the locale by using the hook `useLocale()`
+- Access and update the locale by using the hook `useT()`
 - If the provided locale doesn't match any JSON translation files, **Talkr** will use the `defaultLanguage` sent to the provider.
 
 ```javascript
 import React, { useState } from "react";
-import { T, useLocale } from "talkr";
+import { useT } from "talkr";
 
 export default function MyComponent() {
-  const { setLocale, locale } = useLocale();
+  const { T, setLocale, locale } = useT();
   return (
     <>
       <h1>{T("hello")}</h1>
@@ -146,65 +150,89 @@ export default function MyComponent() {
   );
 }
 ```
-<a name='autocomplete'></a>
-#### AUTOCOMPLETION (🤘NEW IN V3)
-*Autocompletion for translation keys is now available in typescript projects. Because each user has different needs and various computer power, autocompletion is optional and **doesn't create any breaking change** for existing users.* 
 
-- Create a `translate.ts` file anywhere in your app (`translate.ts` can be named as you want)
+<a name='autocomplete'></a>
+
+#### AUTOCOMPLETION
+
+Autocompletion for translation keys is available in typescript projects. Because json must be parsed at compile time, you will need to create your own `useT` hook with `Talkr`'s `Autocomplete` type wrapper.
+
+Here's how to do it:
+
+- Create a `translate.tsx` file anywhere in your app(`translate.tsx` can be named as you want)
 - Import your main language JSON translation (ex: `en.json`)
 - Instantiate autocompletion with **Talkr's Autocomplete**
-- Export a wrapper `tr` around **Talkr's `T`** classic function. (`tr` can be named as you want)
+- Export a `useAutocompleteT` hook around **Talkr's `useT()`**
 
 ```javascript
-import { T, Autocomplete, TParams } from "talkr";
+import { useT, Autocomplete, TParams, tr } from "talkr";
 import en from "./en.json";
 
 type Key = Autocomplete<typeof en>;
-export const tr = (key: Key, params?: TParams) => T(key, params);
-```
-➡ You now have the choice between using your own `tr` function - which provides autocompletion - or using **Talkr's `T`** - which doesn't provide autocompletion - in your app. 
 
-> 🤓 Pro-tip: since you will need to import `tr` from `translate.ts`, it is highly recommended to add an alias `translate` to your builder's config and `tsconfig.json`. This will allow you to write `import { tr } from "translate"` instead of `import { tr } from "../../translate"`. 
-> 
+export const useAutocompleteT = () => {
+  const { locale, languages, defaultLanguage } = useT();
+  return {
+    T: (key: Key, params?: TParams) =>
+      tr({ locale, languages, defaultLanguage }, key, params),
+  };
+};
+```
+
+If you prefer to keep the `useT` naming, just write:
+
+```js
+import { useT as useTr, Autocomplete, TParams, tr } from "talkr";
+import en from "./en.json";
+
+type Key = Autocomplete<typeof en>;
+
+export const useT = () => {
+  const { locale, languages, defaultLanguage } = useTr();
+  return {
+    T: (key: Key, params?: TParams) =>
+      tr({ locale, languages, defaultLanguage }, key, params),
+  };
+};
+```
+
+You now have the choice between using your own `useAutocompleteT` hook - which provides real-time autocompletion - or using **Talkr's `useT`** - which doesn't provide autocompletion - in your app.
+
+```js
+function App() {
+  const { T } = useAutocompleteT()
+  return (
+    <>
+      <h1>{ T("feedback.success") }</h1>
+      <h4>{ T("user.describe.complex", { name: "joe", hobby: "coding" }) }</h4>
+    </>
+  );
+}
+```
+> 🤓 Pro-tip: since you will need to import `useAutocompleteT` from `translate.tsx`, it is highly recommended to add an alias `translate` to your builder's config and `tsconfig.json`. This will allow you to write `import { useAutocompleteT } from "translate"` instead of `import { useAutocompleteT } from "../../translate"`.
+>
 > **Exemples:**
 > webpack
+>
 > ```
 > resolve: {
 >   extensions: [".ts", ".tsx", ".js", "jsx", ".json"],
 >   alias: {
 >       translate: path.resolve(__dirname, "src/translate/"),
 >  }
->```
+> ```
+>
 > tsconfig
+>
 > ```
 > { "compilerOptions": {
 >   "paths": {
 >   "translate/*": ["src/translate/*"]
 >   }
 > }}
->````
->for other bundlers, please refer to their respective documentations. 
-
-#### SIMPLE USAGE WITH AUTOCOMPLETION
-
-- In any component, import your own translation function `tr` (it can be named as you want).
-- Fetch the desired sentence as if you were directly accessing an object, by adding `.` between each key. Based on the JSON example above, we could print the sentence `The connection succedeed` by simply writing `tr("feedback.success")`
-- **Talkr** will provide a list of suggested keys in real time. 
-
-```javascript
-import React from "react";
-import { tr } from "translation"; 
-// or import { tr } from "../../translation" if you don't use an alias :(
-
-export default function MyComponent() {
-  return (
-    <>
-      <h1>{tr("hello")}</h1>
-      <div>{tr("feedback.success")}</div>
-    </>
-  );
-}
-```
+> ```
+>
+> for other bundlers, please refer to their respective documentations.
 
 ## PROPS
 

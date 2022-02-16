@@ -1,22 +1,23 @@
 import * as React from "react";
 import { createContext, useState, useContext } from "react";
 import { initLocale } from "./initLocale";
-import { TContext, TProps } from "./models";
+import { TContext, TParams, TProps, UseT } from "./models";
+import { tr } from "./tr";
+export { tr } from "./tr";
 export * from "./models";
-export { T } from "./t";
 
 export const TalkrContext = createContext<TContext>({
   locale: "",
   setLocale: () => null,
   languages: {},
-  defaultLanguage: ""
+  defaultLanguage: "",
 });
 
 export function Talkr({
   children,
   languages,
   defaultLanguage,
-  detectBrowserLanguage
+  detectBrowserLanguage,
 }: TProps) {
   const [locale, setLocale] = useState(
     initLocale(defaultLanguage, detectBrowserLanguage)
@@ -29,7 +30,18 @@ export function Talkr({
     </TalkrContext.Provider>
   );
 }
-
-export function useLocale() {
-  return useContext(TalkrContext);
+export function useT(): UseT {
+  const { locale, languages, defaultLanguage, setLocale } = useContext(
+    TalkrContext
+  );
+  return {
+    languages,
+    defaultLanguage,
+    locale,
+    setLocale,
+    T: <Key extends string, Params extends TParams>(
+      key: Key,
+      params?: Params
+    ) => tr({ locale, languages, defaultLanguage }, key, params),
+  };
 }
