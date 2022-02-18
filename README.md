@@ -169,6 +169,7 @@ Autocompletion for translation keys is available in Typescript projects. Because
 
 Here's how to do it:
 
+- Make sure you use `Typescript >=4.5.5` (we don't guarantee it will work on older versions)
 - Create a `translate.tsx` file anywhere in your app(`translate.tsx` can be named as you want)
 - Import your main language JSON translation (ex: `en.json`)
 - Instantiate autocompletion with **Talkr's** `Autocomplete`
