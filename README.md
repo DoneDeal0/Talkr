@@ -2,23 +2,32 @@
 
 # TALKR - DOCUMENTATION
 
+Also see our <a href="https://talkr-documentation.netlify.app/">official website</a>
+
 ## WHAT IS IT?
 
 <img width="588" alt="talkr autocomplete in action" src="https://user-images.githubusercontent.com/43271780/154273252-f0818de8-66d1-4265-9e6f-bebe5bd8b73f.png">
 
-**Talkr** is a super small i18n provider for React applications. It supports Typescript, provides autocompletion, has 0 dependencies, and is very easy to use.
+**Talkr** is the lightest i18n provider for React applications. It supports **Typescript**, provides **autocompletion**, has **0 dependencies**, and is very easy to use.
 
-### features:
+### Features:
 
-- auto-detect browser language
-- auto-detect plural rules based on any language
-- dynamic translations with multiple keys
-- access deeply nested keys in json translations files
-- provides typescript autocompletion for your keys (🤘)</a>
+- Auto-detect browser language
+- Auto-detect plural rules based on any language
+- Dynamic translations with multiple keys
+- Access deeply nested keys in json translations files
+- Provides typescript autocompletion for your keys (🤘)
 
-## NICE! BUT HOW DOES IT WORK?
+## Installation
 
-#### JSON
+```bash
+// with npm
+npm install talkr
+// with yarn
+yarn add talkr
+```
+
+# Add translation files
 
 - Create your JSON translation files.
 - Surround dynamic values by double underscores: `__dynamicValue__`.
@@ -47,12 +56,12 @@
 }
 ```
 
-#### PROVIDER
+# Set up
 
 - In your index file, import your JSON translations
-- Wrap your App with **Talkr Provider**
+- Wrap your App with **Talkr**'s `Provider`
 - Pass it your available `languages` and your `defaultLanguage`.
-- You also have the option to let **Talkr** detect browser's language with the prop `detectBrowserLanguage` (see #Props).
+- You also have the option to let **Talkr** detect browser's language with the prop `detectBrowserLanguage` (see [props](#Available props)).
 
 ```javascript
 import * as React from "react";
@@ -70,10 +79,11 @@ ReactDOM.render(
 );
 ```
 
-#### SIMPLE USAGE
+# Simple usage
 
-- In any component, import **Talker**'s translation function `T`.
-- Fetch the desired sentence as if you were directly accessing an object, by adding `.` between each key. Based on the JSON example above, we could print the sentence `The connection succedeed` by simply writing `T("feedback.success")`
+- In any component, import **Talker**'s hook `useT`.
+- Destructure the translation function `T` from `useT`
+- Fetch the desired sentence as if you were directly accessing an object, by adding `.` between each key. Based on the JSON example [above](add-translation-files), we could print the sentence `The connection succedeed` by simply writing `T("feedback.success")`
 
 ```javascript
 import React from "react";
@@ -90,10 +100,10 @@ export default function MyComponent() {
 }
 ```
 
-#### DYNAMIC VALUES
+# Dynamic values
 
 - To handle dynamic translations, just add an object with all necessary dynamic values
-- To make it work, you need to surround the dynamic values by double underscores in your JSON files (`__dynamicValue__`)
+- To make it work, you need to surround the dynamic values by double underscores in your [JSON files](Add translation files) (`__dynamicValue__`)
 
 ```javascript
 import React from "react";
@@ -109,7 +119,7 @@ export default function MyComponent() {
 }
 ```
 
-#### PLURAL
+# Plural
 
 - To handle plural, just add a `count` property to the object
 - To make it work, you need to provide both `zero`, `one` and `many` values to your JSON files.
@@ -130,7 +140,7 @@ export default function MyComponent() {
 }
 ```
 
-#### LOCALE
+# Locale
 
 - Access and update the locale by using the hook `useT()`
 - If the provided locale doesn't match any JSON translation files, **Talkr** will use the `defaultLanguage` sent to the provider.
@@ -153,16 +163,16 @@ export default function MyComponent() {
 
 <a name='autocomplete'></a>
 
-#### AUTOCOMPLETION
+# AUTOCOMPLETION
 
-Autocompletion for translation keys is available in typescript projects. Because json must be parsed at compile time, you will need to create your own `useT` hook with `Talkr`'s `Autocomplete` type wrapper.
+Autocompletion for translation keys is available in Typescript projects. Because json must be parsed at **compile time**, you will need to create your own `useAutocompleteT` hook with **Talkr**'s `Autocomplete` type wrapper.
 
 Here's how to do it:
 
 - Create a `translate.tsx` file anywhere in your app(`translate.tsx` can be named as you want)
 - Import your main language JSON translation (ex: `en.json`)
-- Instantiate autocompletion with **Talkr's Autocomplete**
-- Export a `useAutocompleteT` hook around **Talkr's `useT()`**
+- Instantiate autocompletion with **Talkr's** `Autocomplete`
+- Export a `useAutocompleteT` hook around **Talkr**'s `useT()`
 
 ```javascript
 import { useT, Autocomplete, TParams, tr } from "talkr";
@@ -196,21 +206,38 @@ export const useT = () => {
 };
 ```
 
-You now have the choice between using your own `useAutocompleteT` hook - which provides real-time autocompletion - or using **Talkr's `useT`** - which doesn't provide autocompletion - in your app.
+# Autocomplete usage
+
+You now have the choice between using your own `useAutocompleteT` hook - which provides real-time autocompletion - or using **Talkr**'s `useT` - which doesn't provide autocompletion - in your app.
 
 ```js
+import { useAutocompleteT } from "./translate";
+
 function App() {
-  const { T } = useAutocompleteT()
+  const { T } = useAutocompleteT();
   return (
     <>
-      <h1>{ T("feedback.success") }</h1>
-      <h4>{ T("user.describe.complex", { name: "joe", hobby: "coding" }) }</h4>
+      <h1>{T("feedback.success")}</h1>
+      <h4>{T("user.describe.complex", { name: "joe", hobby: "coding" })}</h4>
     </>
   );
 }
 ```
-> 🤓 Pro-tip: since you will need to import `useAutocompleteT` from `translate.tsx`, it is highly recommended to add an alias `translate` to your builder's config and `tsconfig.json`. This will allow you to write `import { useAutocompleteT } from "translate"` instead of `import { useAutocompleteT } from "../../translate"`.
->
+
+> 🤓 Pro-tip: since you will need to import `useAutocompleteT` from `translate.tsx`, it is highly recommended to add an alias `translate` to your builder's config and `tsconfig.json`.
+
+This will allow you to write
+
+```js
+import { useAutocompleteT } from "translate" 👍
+```
+
+instead of
+
+```js
+import { useAutocompleteT } from "../../translate" 👎
+```
+
 > **Exemples:**
 > webpack
 >
@@ -234,9 +261,7 @@ function App() {
 >
 > for other bundlers, please refer to their respective documentations.
 
-## PROPS
-
-### Provider
+# Available props
 
 You can pass these props to **Talkr**'s provider
 | |Type |Role |
@@ -246,16 +271,6 @@ You can pass these props to **Talkr**'s provider
 |detectBrowserLanguage |`boolean`|if `true`, **Talkr** will automatically use browser language and override the `defaultLanguage`. If the browser language is not included in your available translations, it will switch back to `defaultLanguage`.|
 
 > 🤓: The auto-detect language feature will always return a simple key such as 'fr' instead of 'fr_FR'. Keep things simple and always declare your languages with 2 letters.
-
-### useLocale
-
-You can access these props from **Talkr**'s hook `useLocale()`
-| |Type |Role |
-|----------------|-------------------------------|-----------------------------|
-|locale |`string` |returns the current locale |
-|setLocale |`(locale: string) => void` |function to update the locale  
-|defaultLanguage |`string`|returns the App's default language|
-|languages |`object`|returns all your JSON translations|
 
 ## CREDITS
 
