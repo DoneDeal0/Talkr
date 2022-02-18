@@ -4,7 +4,7 @@ import { initLocale } from "./initLocale";
 import { TContext, TParams, TProps, UseT } from "./models";
 import { tr } from "./tr";
 export { tr } from "./tr";
-export * from "./models";
+export { Autocomplete, TParams } from "./models";
 
 export const TalkrContext = createContext<TContext>({
   locale: "",
