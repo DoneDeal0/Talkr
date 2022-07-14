@@ -17,6 +17,7 @@ Also see our <a href="https://talkr-documentation.netlify.app/">official website
 - Dynamic translations with multiple keys
 - Access deeply nested keys in json translations files
 - Adapts syntax to gender
+- Supports React Native
 - Provides typescript autocompletion for your keys (🤘)
 
 ## Installation
@@ -288,6 +289,53 @@ import { useAutocompleteT } from "../../translate" 👎
 > ```
 >
 > for other bundlers, please refer to their respective documentations.
+
+# React Native
+
+- Add your provider directly in App.(js|tsx)
+
+```javascript
+import { StyleSheet, Text, View } from "react-native";
+import { Talkr } from "talkr";
+import en from "./src/i18n/en.json";
+import fr from "./src/i18n/fr.json";
+import Hello from "./src/Hello";
+
+export default function App() {
+  return (
+    <Talkr languages={{ en, fr }} defaultLanguage="en">
+      <View style={styles.container}>
+        <MyComponent />
+      </View>
+    </Talkr>
+  );
+}
+```
+
+- All the exemples above are valid in React Native. You only have to replace html tags (`div`, `h1`, etc.) by `Text`.
+- Since `Intl` api is not available in React Native, the `count` param will only return three type of plural key: `zero`, `one` and `many`. Please adjust your json files accordingly.
+
+```javascript
+import React, { Text, Button } from "react-native";
+import { useState } from "react";
+import { useT } from "talkr";
+
+export default function MyComponent() {
+  const { T } = useT();
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <Text>{T("hello")}</Text>
+      <Text>
+        {T("user.describe.complex", { name: "joe", hobby: "coding" })}
+      </Text>
+      <Text>{T("message-count", { count })}</Text>
+      <Button onPress={() => setCount(count + 1)} title="+1" />
+    </>
+  );
+}
+```
 
 # Available props
 
