@@ -114,6 +114,15 @@ export default function MyComponent() {
 - To handle dynamic translations, just add an object with all necessary dynamic values
 - To make it work, you need to surround the dynamic values by double underscores in your [JSON files](Add translation files) (`__dynamicValue__`)
 
+```json
+"user": {
+    "describe": {
+      "simple": "You are __name__",
+      "complex": "You are __name__ and you like __hobby__"
+    }
+  }
+```
+
 ```javascript
 import React from "react";
 import { useT } from "talkr";
@@ -132,6 +141,14 @@ export default function MyComponent() {
 
 - To handle plural, just add a `count` property to the object
 - To make it work, you need to provide both `zero`, `one` and `many` values to your JSON files.
+
+```json
+"message-count": {
+    "zero": "you don't have new messages",
+    "one": "you have 1 message",
+    "many": "you have __count__ messages"
+  }
+```
 
 ```javascript
 import React, { useState } from "react";
@@ -154,6 +171,15 @@ export default function MyComponent() {
 - Some languages have different syntax for masculine and feminine genders.
 - To adapt your sentence accordingly, just pass the param `gender: m` for `male`, or `gender: f` for `female`.
 - To make it work, you need to provide both `male` and `female` values to your JSON files.
+
+```json
+"idiom": {
+    "sovereign": {
+      "female": "Long live the Queen!",
+      "male": "Long live the King!"
+    }
+  }
+```
 
 ```javascript
 import React from "react";
@@ -354,6 +380,7 @@ You can pass these props to **Talkr**'s provider
 <img src="https://user-images.githubusercontent.com/43271780/178990049-46b05704-1344-4d55-a5a7-7265724edc5c.png"/>
 </a>
 <br/>
+
 ## CREDITS
 
 DoneDeal0
