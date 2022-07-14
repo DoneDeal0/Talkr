@@ -27,18 +27,10 @@ export function tr<Key extends string, Params extends TParams>(
     console.warn(`Talkr: Missing translation for ${key}`);
     return null;
   }
-  const currentParams =
-    params &&
-    (Object.entries(params).reduce(
-      (acc, cur) => ({ ...acc, [cur[0]]: cur[1].toString() }),
-      {}
-    ) as TParams["params"]);
-  return currentParams
+  return params
     ? result
         .split("__")
-        .map((word: string) =>
-          currentParams[word] ? currentParams[word] : word
-        )
+        .map((word: string) => params[word] || word)
         .join("")
     : result;
 }
