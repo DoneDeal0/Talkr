@@ -299,7 +299,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Talkr } from "talkr";
 import en from "./src/i18n/en.json";
 import fr from "./src/i18n/fr.json";
-import Hello from "./src/Hello";
+import MyComponent from "./src/MyComponent";
 
 export default function App() {
   return (
@@ -313,7 +313,7 @@ export default function App() {
 ```
 
 - All the exemples above are valid in React Native. You only have to replace html tags (`div`, `h1`, etc.) by `Text`.
-- Since `Intl` api is not available in React Native, the `count` param will only return three type of plural key: `zero`, `one` and `many`. Please adjust your json files accordingly.
+- Since `Intl` api is not available in React Native, the `count` param will only return three types of plural keys: `zero`, `one` and `many`. Please adjust your json files accordingly.
 
 ```javascript
 import React, { Text, Button } from "react-native";
@@ -344,7 +344,7 @@ You can pass these props to **Talkr**'s provider
 |----------------|-------------------------------|-----------------------------|
 |languages |`object` |object containing all your json files. Typical format: `{en: {...}, fr: {...}}` |
 |defaultLanguage |`string` |default language of your app (a similar key must be included in the `language` prop) |
-|detectBrowserLanguage |`boolean`|if `true`, **Talkr** will automatically use browser language and override the `defaultLanguage`. If the browser language is not included in your available translations, it will switch back to `defaultLanguage`.|
+|detectBrowserLanguage |`boolean`|if `true`, **Talkr** will automatically use browser language and override the `defaultLanguage`. If the browser language is not included in your available translations, it will switch back to `defaultLanguage`. Not available in React Native. Use `expo-localization` to fetch the default user locale instead.|
 
 > 🤓: The auto-detect language feature will always return a simple key such as 'fr' instead of 'fr_FR'. Keep things simple and always declare your languages with 2 letters.
 
