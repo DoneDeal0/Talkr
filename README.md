@@ -16,6 +16,7 @@ Also see our <a href="https://talkr-documentation.netlify.app/">official website
 - Auto-detect plural rules based on any language
 - Dynamic translations with multiple keys
 - Access deeply nested keys in json translations files
+- Adapts syntax to gender
 - Provides typescript autocompletion for your keys (🤘)
 
 ## Installation
@@ -46,6 +47,12 @@ yarn add talkr
     "describe": {
       "simple": "You are __name__",
       "complex": "You are __name__ and you like __hobby__"
+    }
+  },
+  "idiom": {
+    "sovereign": {
+      "female": "Long live the Queen!",
+      "male": "Long live the King!"
     }
   },
   "message-count": {
@@ -135,6 +142,26 @@ export default function MyComponent() {
     <>
       <h1>{T("message-count", { count })}</h1>
       <button onClick={() => setCount(count + 1)}>+1</button>
+    </>
+  );
+}
+```
+
+# Gender
+
+- Some languages have different syntax for masculine and feminine genders.
+- To adapt your sentence accordingly, just pass the param `gender: m` for `male`, or `gender: f` for `female`.
+- To make it work, you need to provide both `male`, and `female` values to your JSON files.
+
+```javascript
+import React from "react";
+import { useT } from "talkr";
+
+export default function MyComponent() {
+  const { T } = useT();
+  return (
+    <>
+      <h1>{T("idiom.sovereign", { gender: "m" })}</h1>
     </>
   );
 }

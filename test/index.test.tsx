@@ -22,6 +22,12 @@ const Component = () => {
       <div data-testid="talkr-count-many">
         {T("message-count", { count: 12 })}
       </div>
+      <div data-testid="talkr-king">
+        {T("idiom.sovereign", { gender: "m" })}
+      </div>
+      <div data-testid="talkr-queen">
+        {T("idiom.sovereign", { gender: "f" })}
+      </div>
       <div data-testid="talkr-unknown">{T("unknown.key")}</div>
       <button role="button" onClick={() => setLocale("fr")}>
         speak french
@@ -88,6 +94,18 @@ describe("locale", () => {
     fireEvent.click(button);
     expect(screen.getByTestId("talkr-locale").textContent).toEqual("fr");
     expect(screen.getByTestId("talkr-basic").textContent).toEqual("Bonjour");
+  });
+});
+
+describe("gender", () => {
+  it("return the correct syntax based on gender", () => {
+    render(<Component />);
+    expect(screen.getByTestId("talkr-king").textContent).toEqual(
+      "Long live the King!"
+    );
+    expect(screen.getByTestId("talkr-queen").textContent).toEqual(
+      "Long live the Queen!"
+    );
   });
 });
 

@@ -14,6 +14,12 @@ const en = {
       complex: "You are __name__ and you like __hobby__",
     },
   },
+  idiom: {
+    sovereign: {
+      female: "Long live the Queen!",
+      male: "Long live the King!",
+    },
+  },
   "message-count": {
     zero: "You don't have new messages",
     one: "You have 1 message",
@@ -31,6 +37,12 @@ const fr = {
     describe: {
       simple: "Vous êtes __name__",
       complex: "Vous êtes __name__ et vous aimez __hobby__",
+    },
+  },
+  idiom: {
+    sovereign: {
+      female: "Longue vie à la Reine!",
+      male: "Longue vie au Roi!",
     },
   },
   "message-count": {

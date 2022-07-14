@@ -1,5 +1,12 @@
 import { TParams, TrContext } from "./models";
 
+const getPlural = (count: number, locale: string) => {
+  if (typeof Intl == "object" && typeof Intl.PluralRules == "function") {
+    return new Intl.PluralRules(locale).select(count);
+  }
+  return count === 0 ? "zero" : count === 1 ? "one" : "other";
+};
+
 export function tr<Key extends string, Params extends TParams>(
   { locale, languages, defaultLanguage }: TrContext,
   key: Key,
@@ -9,15 +16,16 @@ export function tr<Key extends string, Params extends TParams>(
   let result = languages[currentLocale];
   let currentKey: string = key;
   if (params && Object.keys(params).includes("count")) {
-    let plural = new Intl.PluralRules(currentLocale).select(
-      params.count as number
-    );
-    currentKey =
+    let plural = getPlural(params.count as number, currentLocale);
+    currentKey +=
       params.count === 0
-        ? `${key}.zero`
+        ? ".zero"
         : plural === "other"
-        ? `${key}.many`
-        : `${key}.${plural}`;
+        ? ".many"
+        : `.${plural}`;
+  }
+  if (params && params["gender"]) {
+    currentKey += params.gender === "m" ? ".male" : ".female";
   }
   currentKey.split(".").forEach((k: string) => {
     if (!result[k]) return;
