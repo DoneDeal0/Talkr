@@ -31,17 +31,13 @@ export function Talkr({
   );
 }
 export function useT(): UseT {
-  const { locale, languages, defaultLanguage, setLocale } = useContext(
-    TalkrContext
-  );
+  const { setLocale, ...props } = useContext(TalkrContext);
   return {
-    languages,
-    defaultLanguage,
-    locale,
+    ...props,
     setLocale,
     T: <Key extends string, Params extends TParams>(
       key: Key,
       params?: Params
-    ) => tr({ locale, languages, defaultLanguage }, key, params),
+    ) => tr(props, key, params),
   };
 }

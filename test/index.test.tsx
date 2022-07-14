@@ -1,7 +1,6 @@
 import * as React from "react";
-import { fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { render } from "./dummy-app";
+import { fireEvent, screen, render } from "./dummy-app";
 import { useT } from "../src/index";
 
 const Component = () => {

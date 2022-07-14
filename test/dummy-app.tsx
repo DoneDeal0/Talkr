@@ -1,5 +1,5 @@
-import * as React from "react";
-import { render } from "@testing-library/react";
+import React, { FC, ReactElement, ReactNode } from "react";
+import { render, RenderOptions } from "@testing-library/react";
 import { Talkr } from "../src/index";
 
 const en = {
@@ -40,7 +40,7 @@ const fr = {
   },
 };
 
-const DummyApp: React.FC = ({ children }) => {
+const DummyApp: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <Talkr languages={{ en, fr }} defaultLanguage="en">
       {children}
@@ -48,8 +48,10 @@ const DummyApp: React.FC = ({ children }) => {
   );
 };
 
-const customRender = (ui: React.ReactElement) =>
-  render(ui, { wrapper: DummyApp });
+const customRender = (
+  ui: ReactElement,
+  options?: Omit<RenderOptions, "wrapper">
+) => render(ui, { wrapper: DummyApp, ...options });
 
 export * from "@testing-library/react";
 export { customRender as render };
