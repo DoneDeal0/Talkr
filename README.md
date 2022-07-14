@@ -349,6 +349,11 @@ You can pass these props to **Talkr**'s provider
 
 > 🤓: The auto-detect language feature will always return a simple key such as 'fr' instead of 'fr_FR'. Keep things simple and always declare your languages with 2 letters.
 
+<br/>
+<a href="https://www.buymeacoffee.com/donedeal0" target="_blank">
+<img src="https://user-images.githubusercontent.com/43271780/178990049-46b05704-1344-4d55-a5a7-7265724edc5c.png"/>
+</a>
+<br/>
 ## CREDITS
 
 DoneDeal0
