@@ -151,7 +151,7 @@ export default function MyComponent() {
 
 - Some languages have different syntax for masculine and feminine genders.
 - To adapt your sentence accordingly, just pass the param `gender: m` for `male`, or `gender: f` for `female`.
-- To make it work, you need to provide both `male`, and `female` values to your JSON files.
+- To make it work, you need to provide both `male` and `female` values to your JSON files.
 
 ```javascript
 import React from "react";
