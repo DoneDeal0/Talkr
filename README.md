@@ -73,17 +73,18 @@ yarn add talkr
 
 ```javascript
 import * as React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { Talkr } from "talkr";
 import App from "./app";
 import en from "./i18n/en.json";
 import fr from "./i18n/fr.json";
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("root"));
+
+root.render(
   <Talkr languages={{ en, fr }} defaultLanguage="en">
     <App />
-  </Talkr>,
-  document.getElementById("root")
+  </Talkr>
 );
 ```
 

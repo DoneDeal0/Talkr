@@ -1,6 +1,6 @@
 {
   "name": "talkr",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Talkr is the lightest i18n provider for React applications. It supports Typescript, provides autocompletion, has 0 dependencies, and is very easy to use.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
