@@ -22,6 +22,6 @@ export declare type TParams = {
 };
 export declare type Autocomplete<schema> = KeyPath<schema> | (string & {});
 export interface UseT extends TContext {
-    T: <Key extends string, Params extends TParams>(key: Key, params?: Params) => React.ReactNode;
+    T: <Key extends string, Params extends TParams>(key: Key, params?: Params) => string;
 }
 export {};

@@ -11,7 +11,7 @@ export function tr<Key extends string, Params extends TParams>(
   { locale, languages, defaultLanguage }: TrContext,
   key: Key,
   params?: Params
-): string | null {
+): string {
   const currentLocale = !languages[locale] ? defaultLanguage : locale;
   let result = languages[currentLocale];
   let currentKey: string = key;
@@ -33,7 +33,7 @@ export function tr<Key extends string, Params extends TParams>(
   });
   if (typeof result !== "string") {
     console.warn(`Talkr: Missing translation for ${key}`);
-    return null;
+    return "";
   }
   return params
     ? result

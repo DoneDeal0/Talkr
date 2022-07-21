@@ -12,7 +12,7 @@ export interface TContext {
   defaultLanguage: string;
 }
 
-export type TrContext = Omit<TContext, "setLocale">
+export type TrContext = Omit<TContext, "setLocale">;
 
 type KeyPrefix<T extends string> = T extends "" ? "" : `.${T}`;
 
@@ -31,5 +31,8 @@ export type TParams = { count?: number; [key: string]: any };
 export type Autocomplete<schema> = KeyPath<schema> | (string & {});
 
 export interface UseT extends TContext {
-  T: <Key extends string, Params extends TParams>(key: Key, params?: Params) => React.ReactNode;
+  T: <Key extends string, Params extends TParams>(
+    key: Key,
+    params?: Params
+  ) => string;
 }
