@@ -11,6 +11,7 @@ export const TalkrContext = createContext<TContext>({
   setLocale: () => null,
   languages: {},
   defaultLanguage: "",
+  showWarning: true,
 });
 
 export function Talkr({
@@ -18,13 +19,14 @@ export function Talkr({
   languages,
   defaultLanguage,
   detectBrowserLanguage,
+  showWarning = true,
 }: TProps) {
   const [locale, setLocale] = useState(
     initLocale(defaultLanguage, detectBrowserLanguage)
   );
   return (
     <TalkrContext.Provider
-      value={{ locale, setLocale, languages, defaultLanguage }}
+      value={{ locale, setLocale, languages, defaultLanguage, showWarning }}
     >
       {children}
     </TalkrContext.Provider>

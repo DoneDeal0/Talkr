@@ -8,7 +8,7 @@ const getPlural = (count: number, locale: string) => {
 };
 
 export function tr<Key extends string, Params extends TParams>(
-  { locale, languages, defaultLanguage }: TrContext,
+  { locale, languages, defaultLanguage, showWarning = true }: TrContext,
   key: Key,
   params?: Params
 ): string {
@@ -32,7 +32,7 @@ export function tr<Key extends string, Params extends TParams>(
     return (result = result[k]);
   });
   if (typeof result !== "string") {
-    console.warn(`Talkr: Missing translation for ${key}`);
+    if (showWarning) console.warn(`Talkr: Missing translation for ${key}`);
     return "";
   }
   return params

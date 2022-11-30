@@ -4,12 +4,14 @@ export interface TProps {
     languages: Record<string, any>;
     defaultLanguage: string;
     detectBrowserLanguage?: boolean;
+    showWarning?: boolean;
 }
 export interface TContext {
     locale: string;
     setLocale: (language: string) => void;
     languages: Record<string, any>;
     defaultLanguage: string;
+    showWarning: boolean;
 }
 export declare type TrContext = Omit<TContext, "setLocale">;
 declare type KeyPrefix<T extends string> = T extends "" ? "" : `.${T}`;

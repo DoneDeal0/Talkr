@@ -3,6 +3,7 @@ export interface TProps {
   languages: Record<string, any>;
   defaultLanguage: string;
   detectBrowserLanguage?: boolean;
+  showWarning?: boolean;
 }
 
 export interface TContext {
@@ -10,6 +11,7 @@ export interface TContext {
   setLocale: (language: string) => void;
   languages: Record<string, any>;
   defaultLanguage: string;
+  showWarning: boolean;
 }
 
 export type TrContext = Omit<TContext, "setLocale">;
