@@ -13,14 +13,16 @@ export interface TContext {
 }
 export type TrContext = Omit<TContext, "setLocale">;
 type KeyPrefix<T extends string> = T extends "" ? "" : `.${T}`;
-export type KeyPath<T> = (T extends object ? {
+type Suffix = "zero" | "one" | "two" | "few" | "many" | "female" | "male";
+type DynamicSuffix = Partial<Record<Suffix, string>>;
+export type KeyPath<T> = (T extends DynamicSuffix ? "" : T extends object ? {
     [K in Exclude<keyof T, symbol>]: `${K}${KeyPrefix<KeyPath<T[K]>>}`;
 }[Exclude<keyof T, symbol>] : "") extends infer D ? Extract<D, string> : never;
 export type TParams = {
     count?: number;
     [key: string]: any;
 };
-export type Autocomplete<schema> = KeyPath<schema> | (string & {});
+export type Autocomplete<schema> = KeyPath<schema>;
 export interface UseT extends TContext {
     T: <Key extends string, Params extends TParams>(key: Key, params?: Params) => string;
 }
