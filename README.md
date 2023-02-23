@@ -4,6 +4,8 @@
 
 Also see our <a href="https://talkr-documentation.netlify.app/">official website</a>
 
+[![Talkr CI](https://github.com/DoneDeal0/Talkr/actions/workflows/talkr.yml/badge.svg)](https://github.com/DoneDeal0/Talkr/actions/workflows/talkr.yml)
+
 ## WHAT IS IT?
 
 <img width="588" alt="talkr autocomplete in action" src="https://user-images.githubusercontent.com/43271780/154273252-f0818de8-66d1-4265-9e6f-bebe5bd8b73f.png">
