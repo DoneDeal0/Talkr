@@ -4,7 +4,15 @@ const getPlural = (count: number, locale: string) => {
   if (typeof Intl == "object" && typeof Intl.PluralRules == "function") {
     return new Intl.PluralRules(locale).select(count);
   }
-  return count === 0 ? "zero" : count === 1 ? "one" : "other";
+  
+  switch (count){
+  case 0:
+    return 'zero'
+  case 1:
+    return 'one'
+  default:
+    return 'many'
+  }
 };
 
 export function tr<Key extends string, Params extends TParams>(
@@ -15,15 +23,13 @@ export function tr<Key extends string, Params extends TParams>(
   const currentLocale = !languages[locale] ? defaultLanguage : locale;
   let result = languages[currentLocale];
   let currentKey: string = key;
-  if (params && Object.keys(params).includes("count")) {
-    let plural = getPlural(params.count as number, currentLocale);
-    currentKey +=
-      params.count === 0
-        ? ".zero"
-        : plural === "other"
-        ? ".many"
-        : `.${plural}`;
+  
+  if (params && typeof params.count === 'number'){
+    const plural = getPlural(params.count, currentLocale)
+
+    currentKey += `.${plural}`
   }
+
   if (params && params["gender"]) {
     currentKey += params.gender === "m" ? ".male" : ".female";
   }
