@@ -2,7 +2,7 @@
 
 # TALKR - DOCUMENTATION
 
-Also see our <a href="https://talkr-documentation.netlify.app/">official website</a>
+Also see our <a href="https://talkr-documentation.netlify.app/">website</a>
 
 [![Talkr CI](https://github.com/DoneDeal0/Talkr/actions/workflows/talkr.yml/badge.svg)](https://github.com/DoneDeal0/Talkr/actions/workflows/talkr.yml)
 
@@ -377,14 +377,21 @@ You can pass these props to **Talkr**'s provider
 
 > 🤓: The auto-detect language feature will always return a simple key such as 'fr' instead of 'fr_FR'. Keep things simple and always declare your languages with 2 letters.
 
-<br/>
-<a href="https://www.buymeacoffee.com/donedeal0" target="_blank">
-<img src="https://user-images.githubusercontent.com/43271780/178990049-46b05704-1344-4d55-a5a7-7265724edc5c.png"/>
-</a>
-<br/>
-
 ## CREDITS
 
 DoneDeal0
+
+## SUPPORT
+
+If you or your company uses **Talkr**, please show your support by becoming a sponsor! Your name and company logo will be displayed on the `README.md`.
+https://github.com/sponsors/DoneDeal0
+
+<br/>
+<a href="https://github.com/sponsors/DoneDeal0" target="_blank">
+<img alt="sponsor" src="https://github.com/DoneDeal0/superdiff/assets/43271780/21deb4f3-fee3-4bf9-a945-ed0b77c6f82f"/>
+</a>
+<br/>
+
+<hr/>
 
 Mouth logo made by emilegraphics from the Noun Project
