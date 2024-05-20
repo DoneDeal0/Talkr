@@ -1,18 +1,17 @@
-<img width="757" alt="talkr logo" src="https://user-images.githubusercontent.com/43271780/96292673-ddec9c80-0fe9-11eb-96d1-1cac75dfaf3d.png">
+<img width="1015" alt="Capture d’écran 2024-05-20 à 17 19 54" src="https://github.com/DoneDeal0/Talkr/assets/43271780/55fb8790-13ee-4273-a113-8cc5478912da"></img>
 
-# TALKR - DOCUMENTATION
+<hr/>
 
-Also see our <a href="https://talkr-documentation.netlify.app/">website</a>
-
-[![Talkr CI](https://github.com/DoneDeal0/Talkr/actions/workflows/talkr.yml/badge.svg)](https://github.com/DoneDeal0/Talkr/actions/workflows/talkr.yml)
-
-## WHAT IS IT?
-
-<img width="588" alt="talkr autocomplete in action" src="https://user-images.githubusercontent.com/43271780/154273252-f0818de8-66d1-4265-9e6f-bebe5bd8b73f.png">
+# TALKR
 
 **Talkr** is the lightest i18n provider for React applications. It supports **Typescript**, provides **autocompletion**, has **0 dependencies**, and is very easy to use.
 
-### Features:
+[![Talkr CI](https://github.com/DoneDeal0/Talkr/actions/workflows/talkr.yml/badge.svg)](https://github.com/DoneDeal0/Talkr/actions/workflows/talkr.yml)
+![NPM Downloads](https://img.shields.io/npm/dy/talkr?logo=npm)
+
+<hr/>
+
+### FEATURES
 
 - Auto-detect browser language
 - Auto-detect plural rules based on any language
@@ -22,7 +21,15 @@ Also see our <a href="https://talkr-documentation.netlify.app/">website</a>
 - Supports React Native
 - Provides typescript autocompletion for your keys (🤘)
 
-## Installation
+<hr/>
+  
+### SCREENSHOT
+
+ <img width="588" alt="talkr autocomplete in action" src="https://user-images.githubusercontent.com/43271780/154273252-f0818de8-66d1-4265-9e6f-bebe5bd8b73f.png"></img>
+
+<hr/>
+
+## INSTALLATION
 
 ```bash
 // with npm
@@ -30,8 +37,9 @@ npm install talkr
 // with yarn
 yarn add talkr
 ```
+<hr/>
 
-# Add translation files
+# ADD TRANSLATION FILES
 
 - Create your JSON translation files.
 - Surround dynamic values by double underscores: `__dynamicValue__`.
@@ -65,8 +73,9 @@ yarn add talkr
   }
 }
 ```
+<hr/>
 
-# Set up
+# SET UP
 
 - In your index file, import your JSON translations
 - Wrap your App with **Talkr**'s `Provider`
@@ -90,7 +99,9 @@ root.render(
 );
 ```
 
-# Simple usage
+<hr/>
+
+# SIMPLE USAGE
 
 - In any component, import **Talker**'s hook `useT`.
 - Destructure the translation function `T` from `useT`
@@ -111,7 +122,9 @@ export default function MyComponent() {
 }
 ```
 
-# Dynamic values
+<hr/>
+
+# DYNAMIC VALUES
 
 - To handle dynamic translations, just add an object with all necessary dynamic values
 - To make it work, you need to surround the dynamic values by double underscores in your [JSON files](Add translation files) (`__dynamicValue__`)
@@ -138,8 +151,9 @@ export default function MyComponent() {
   );
 }
 ```
+<hr/>
 
-# Plural
+# PLURAL
 
 - To handle plural, just add a `count` property to the object
 - To make it work, you need to provide both `zero`, `one` and `many` values to your JSON files.
@@ -167,8 +181,9 @@ export default function MyComponent() {
   );
 }
 ```
+<hr/>
 
-# Gender
+# GENDER
 
 - Some languages have different syntax for masculine and feminine genders.
 - To adapt your sentence accordingly, just pass the param `gender: m` for `male`, or `gender: f` for `female`.
@@ -197,7 +212,9 @@ export default function MyComponent() {
 }
 ```
 
-# Locale
+<hr/>
+
+# LOCALE
 
 - Access and update the locale by using the hook `useT()`
 - If the provided locale doesn't match any JSON translation files, **Talkr** will use the `defaultLanguage` sent to the provider.
@@ -217,6 +234,8 @@ export default function MyComponent() {
   );
 }
 ```
+
+<hr/>
 
 <a name='autocomplete'></a>
 
@@ -319,7 +338,9 @@ import { useAutocompleteT } from "../../translate" 👎
 >
 > for other bundlers, please refer to their respective documentations.
 
-# React Native
+<hr/>
+
+# REACT NATIVE
 
 - Add your provider directly in App.(js|tsx)
 
@@ -366,7 +387,9 @@ export default function MyComponent() {
 }
 ```
 
-# Available props
+<hr/>
+
+# AVAILABLE PROPS
 
 You can pass these props to **Talkr**'s provider
 | |Type |Role |
@@ -377,9 +400,13 @@ You can pass these props to **Talkr**'s provider
 
 > 🤓: The auto-detect language feature will always return a simple key such as 'fr' instead of 'fr_FR'. Keep things simple and always declare your languages with 2 letters.
 
+<hr/>
+
 ## CREDITS
 
 DoneDeal0
+
+<hr/>
 
 ## SUPPORT
 
@@ -394,4 +421,6 @@ https://github.com/sponsors/DoneDeal0
 
 <hr/>
 
-Mouth logo made by emilegraphics from the Noun Project
+<hr/>
+
+Also see our <a href="https://talkr-documentation.netlify.app/">website</a>
