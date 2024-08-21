@@ -32,7 +32,6 @@ const Component = () => {
       <button role="button" onClick={() => setLocale("fr")}>
         speak french
       </button>
-      ;
     </div>
   );
 };
@@ -46,7 +45,6 @@ const Counter = () => {
       <button role="button" onClick={() => setCount(count + 1)}>
         +1
       </button>
-      ;
     </div>
   );
 };

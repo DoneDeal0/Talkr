@@ -6,7 +6,8 @@
 
 **Talkr** is the lightest i18n provider for React applications. It supports **Typescript**, provides **autocompletion**, has **0 dependencies**, and is very easy to use.
 
-[![Talkr CI](https://github.com/DoneDeal0/Talkr/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/DoneDeal0/Talkr/actions/workflows/ci-cd.yml)
+[![CI](https://github.com/DoneDeal0/Talkr/actions/workflows/ci.yml/badge.svg)](https://github.com/DoneDeal0/Talkr/actions/workflows/ci.yml)
+[![CD](https://github.com/DoneDeal0/Talkr/actions/workflows/cd.yml/badge.svg)](https://github.com/DoneDeal0/Talkr/actions/workflows/cd.yml)
 ![NPM Downloads](https://img.shields.io/npm/dy/talkr?logo=npm)
 
 <hr/>
