@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DoneDeal0/Talkr"
+    "url": "git+https://github.com/DoneDeal0/Talkr.git"
   },
   "keywords": [
     "i18n",
@@ -40,6 +40,7 @@
   "author": "DoneDeal0",
   "license": "ISC",
   "devDependencies": {
+    "@actions/core": "^1.10.1",
     "@babel/preset-env": "^7.25.3",
     "@babel/preset-react": "^7.24.7",
     "@eslint/js": "^9.9.0",
