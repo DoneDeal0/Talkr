@@ -20,7 +20,7 @@ export function Talkr({
   detectBrowserLanguage,
 }: TProps) {
   const [locale, setLocale] = useState(
-    initLocale(defaultLanguage, detectBrowserLanguage)
+    initLocale(defaultLanguage, detectBrowserLanguage),
   );
   return (
     <TalkrContext.Provider
@@ -37,7 +37,7 @@ export function useT(): UseT {
     setLocale,
     T: <Key extends string, Params extends TParams>(
       key: Key,
-      params?: Params
+      params?: Params,
     ) => tr(props, key, params),
   };
 }

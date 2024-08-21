@@ -1,0 +1,93 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run typescript
+        run: npm run tsc
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build the project
+        run: npm run build
+
+  publish:
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    # create a current_version variable that can be used in the next steps
+    outputs:
+      current_version: ${{ steps.version_check.outputs.current_version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Talkr
+        run: npm run build
+      # fetch the latest release tag and compare it to the current package.json version
+      # publish if the version has been bumped
+      # if there is no tag (first release), the previous version is set to "none" and the publish step continues
+      - name: Check if package version has been bumped
+        id: version_check
+        run: |
+          current_version=$(jq -r '.version' package.json)
+          echo "current_version=$current_version" >> $GITHUB_ENV
+          git fetch --tags
+          previous_version=$(git tag --sort=-v:refname | head -n 1 || echo "none")
+          echo "previous_version=$previous_version" >> $GITHUB_ENV
+          if [ "$previous_version" != "none" ] && [ "$previous_version" == "v$current_version" ]; then
+            echo "Version has not been bumped. Exiting."
+            exit 1
+          fi
+
+      - name: Publish to npm
+        if: ${{ steps.version_check.outputs.current_version != '' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access=public
+
+      - name: Create GitHub Release
+        if: ${{ steps.version_check.outputs.current_version != '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git tag "v${{ steps.version_check.outputs.current_version }}"
+          git push origin "v${{ steps.version_check.outputs.current_version }}"
+          release_notes=$(git log -1 --pretty=%B)
+          gh release create "v${{ steps.version_check.outputs.current_version }}" --title "v${{ steps.version_check.outputs.current_version }}" --notes "${release_notes}"

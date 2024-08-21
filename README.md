@@ -25,7 +25,7 @@
   
 ### SCREENSHOT
 
- <img width="588" alt="talkr autocomplete in action" src="https://user-images.githubusercontent.com/43271780/154273252-f0818de8-66d1-4265-9e6f-bebe5bd8b73f.png"></img>
+<img width="588" alt="talkr autocomplete in action" src="https://user-images.githubusercontent.com/43271780/154273252-f0818de8-66d1-4265-9e6f-bebe5bd8b73f.png"></img>
 
 <hr/>
 
@@ -37,6 +37,7 @@ npm install talkr
 // with yarn
 yarn add talkr
 ```
+
 <hr/>
 
 # ADD TRANSLATION FILES
@@ -73,6 +74,7 @@ yarn add talkr
   }
 }
 ```
+
 <hr/>
 
 # SET UP
@@ -95,7 +97,7 @@ const root = createRoot(document.getElementById("root"));
 root.render(
   <Talkr languages={{ en, fr }} defaultLanguage="en">
     <App />
-  </Talkr>
+  </Talkr>,
 );
 ```
 
@@ -151,6 +153,7 @@ export default function MyComponent() {
   );
 }
 ```
+
 <hr/>
 
 # PLURAL
@@ -181,6 +184,7 @@ export default function MyComponent() {
   );
 }
 ```
+
 <hr/>
 
 # GENDER

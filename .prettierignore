@@ -1,0 +1,13 @@
+# Ignore artifacts:
+coverage
+dist
+.github
+.prettierrc
+.vscode
+jest.config.js
+package-lock.json
+package.json
+README.md
+rollup.config.js
+tsconfig.json
+eslint.config.mjs

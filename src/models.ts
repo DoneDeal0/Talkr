@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface TProps {
   children: React.ReactNode;
   languages: Record<string, any>;
@@ -22,10 +23,10 @@ type DynamicSuffix = Partial<Record<Suffix, string>>;
 export type KeyPath<T> = (
   T extends DynamicSuffix
     ? ""
-    : T extends object 
+    : T extends object
       ? {
-        [K in Exclude<keyof T, symbol>]: `${K}${KeyPrefix<KeyPath<T[K]>>}`;
-      }[Exclude<keyof T, symbol>]
+          [K in Exclude<keyof T, symbol>]: `${K}${KeyPrefix<KeyPath<T[K]>>}`;
+        }[Exclude<keyof T, symbol>]
       : ""
 ) extends infer D
   ? Extract<D, string>
@@ -38,6 +39,6 @@ export type Autocomplete<schema> = KeyPath<schema>;
 export interface UseT extends TContext {
   T: <Key extends string, Params extends TParams>(
     key: Key,
-    params?: Params
+    params?: Params,
   ) => string;
 }

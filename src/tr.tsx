@@ -10,19 +10,19 @@ const getPlural = (count: number, locale: string) => {
 export function tr<Key extends string, Params extends TParams>(
   { locale, languages, defaultLanguage }: TrContext,
   key: Key,
-  params?: Params
+  params?: Params,
 ): string {
   const currentLocale = !languages[locale] ? defaultLanguage : locale;
   let result = languages[currentLocale];
   let currentKey: string = key;
   if (params && Object.keys(params).includes("count")) {
-    let plural = getPlural(params.count as number, currentLocale);
+    const plural = getPlural(params.count as number, currentLocale);
     currentKey +=
       params.count === 0
         ? ".zero"
         : plural === "other"
-        ? ".many"
-        : `.${plural}`;
+          ? ".many"
+          : `.${plural}`;
   }
   if (params && params["gender"]) {
     currentKey += params.gender === "m" ? ".male" : ".female";

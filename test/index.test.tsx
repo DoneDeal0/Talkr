@@ -59,22 +59,22 @@ describe("translate", () => {
   it("render a nested translation", () => {
     render(<Component />);
     expect(screen.getByTestId("talkr-nested").textContent).toEqual(
-      "The connection succedeed"
+      "The connection succedeed",
     );
   });
   it("render a dynamic translation", () => {
     render(<Component />);
     expect(screen.getByTestId("talkr-complex").textContent).toEqual(
-      "You are Joe and you like coding"
+      "You are Joe and you like coding",
     );
     expect(screen.getByTestId("talkr-count-zero").textContent).toEqual(
-      "You don't have new messages"
+      "You don't have new messages",
     );
     expect(screen.getByTestId("talkr-count-one").textContent).toEqual(
-      "You have 1 message"
+      "You have 1 message",
     );
     expect(screen.getByTestId("talkr-count-many").textContent).toEqual(
-      "You have 12 messages"
+      "You have 12 messages",
     );
   });
   it("render an empty string if the translation doesn't exist", () => {
@@ -101,10 +101,10 @@ describe("gender", () => {
   it("return the correct syntax based on gender", () => {
     render(<Component />);
     expect(screen.getByTestId("talkr-king").textContent).toEqual(
-      "Long live the King!"
+      "Long live the King!",
     );
     expect(screen.getByTestId("talkr-queen").textContent).toEqual(
-      "Long live the Queen!"
+      "Long live the Queen!",
     );
   });
 });
@@ -114,21 +114,21 @@ describe("live translation update", () => {
     render(<Counter />);
     const button = screen.getByRole("button");
     expect(screen.getByTestId("talkr-count").textContent).toEqual(
-      "You don't have new messages"
+      "You don't have new messages",
     );
     fireEvent.click(button);
     expect(screen.getByTestId("talkr-count").textContent).toEqual(
-      "You have 1 message"
+      "You have 1 message",
     );
     fireEvent.click(button);
     expect(screen.getByTestId("talkr-count").textContent).toEqual(
-      "You have 2 messages"
+      "You have 2 messages",
     );
     fireEvent.click(button);
     fireEvent.click(button);
     fireEvent.click(button);
     expect(screen.getByTestId("talkr-count").textContent).toEqual(
-      "You have 5 messages"
+      "You have 5 messages",
     );
   });
 });

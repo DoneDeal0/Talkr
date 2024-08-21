@@ -7,7 +7,7 @@ const getBrowserLanguage = (defaultLanguage: string) => {
 
 export const initLocale = (
   defaultLanguage: string,
-  detectBrowserLanguage: boolean = false
+  detectBrowserLanguage: boolean = false,
 ) => {
   if (detectBrowserLanguage) return getBrowserLanguage(defaultLanguage);
   return defaultLanguage;
