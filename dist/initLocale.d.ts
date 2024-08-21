@@ -1,4 +1,1 @@
-export declare const initLocale: (
-  defaultLanguage: string,
-  detectBrowserLanguage?: boolean,
-) => string;
+export declare const initLocale: (defaultLanguage: string, detectBrowserLanguage?: boolean) => string;
