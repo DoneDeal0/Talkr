@@ -19,8 +19,10 @@
 - Dynamic translations with multiple keys
 - Access deeply nested keys in json translations files
 - Adapts syntax to gender
+- Supports lists
 - Supports React Native
-- Provides typescript autocompletion for your keys (🤘)
+- Provides typescript autocompletion for your keys 
+
 
 <hr/>
   
@@ -72,7 +74,8 @@ yarn add talkr
     "zero": "you don't have new messages",
     "one": "you have 1 message",
     "many": "you have __count__ messages"
-  }
+  },
+  "days": ["Monday", "Tuesday", "Wednesday"],
 }
 ```
 
@@ -212,6 +215,34 @@ export default function MyComponent() {
   return (
     <>
       <h1>{T("idiom.sovereign", { gender: "m" })}</h1>
+    </>
+  );
+}
+```
+
+# LIST
+
+- You can render a list of string
+- The last junction can be styled thanks to the following parameters:
+
+```ts
+  listType?: "conjunction" | "disjunction"; // ""conjunction" by default
+  listStyle?: "long" | "narrow"; // "narrow" by default
+```
+
+```json
+  "days": ["Monday", "Tuesday", "Wednesday"],
+```
+
+```javascript
+import React from "react";
+import { useT } from "talkr";
+
+export default function MyComponent() {
+  const { T } = useT();
+  return (
+    <>
+      <h1>{T("days", { listType: "conjunction" })}</h1>
     </>
   );
 }

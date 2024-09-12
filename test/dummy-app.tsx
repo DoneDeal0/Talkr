@@ -25,6 +25,8 @@ const en = {
     one: "You have 1 message",
     many: "You have __count__ messages",
   },
+  days: ["Monday", "Tuesday", "Wednesday"],
+  emptyList: [],
 };
 
 const fr = {
@@ -50,6 +52,8 @@ const fr = {
     one: "Vous avez 1 message",
     many: "Vous avez __count__ messages",
   },
+  days: ["Lundi", "Mardi", "Mercredi"],
+  emptyList: [],
 };
 
 const DummyApp: FC<{ children: ReactNode }> = ({ children }) => {

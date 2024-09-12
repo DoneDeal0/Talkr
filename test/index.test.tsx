@@ -28,6 +28,16 @@ const Component = () => {
       <div data-testid="talkr-queen">
         {T("idiom.sovereign", { gender: "f" })}
       </div>
+      <div data-testid="talkr-days-conjunction">{T("days")}</div>
+      <div data-testid="talkr-days-conjunction-long">
+        {T("days", { listStyle: "long" })}
+      </div>
+      <div data-testid="talkr-days-disjunction">
+        {T("days", { listType: "disjunction" })}
+      </div>
+      <div data-testid=" talkr-empty-list">
+        {T("empty-list", { listType: "disjunction" })}
+      </div>
       <div data-testid="talkr-unknown">{T("unknown.key")}</div>
       <button role="button" onClick={() => setLocale("fr")}>
         speak french
@@ -104,6 +114,28 @@ describe("gender", () => {
     expect(screen.getByTestId("talkr-queen").textContent).toEqual(
       "Long live the Queen!",
     );
+  });
+});
+
+describe("list", () => {
+  it("return a conjuction list", () => {
+    render(<Component />);
+    expect(screen.getByTestId("talkr-days-conjunction").textContent).toEqual(
+      "Monday, Tuesday, Wednesday",
+    );
+    expect(
+      screen.getByTestId("talkr-days-conjunction-long").textContent,
+    ).toEqual("Monday, Tuesday, and Wednesday");
+  });
+  it("return a disjunction list", () => {
+    render(<Component />);
+    expect(screen.getByTestId("talkr-days-disjunction").textContent).toEqual(
+      "Monday, Tuesday, or Wednesday",
+    );
+  });
+  it("return a empty string if the list is empty", () => {
+    render(<Component />);
+    expect(screen.getByTestId("talkr-empty-list").textContent).toEqual("");
   });
 });
 

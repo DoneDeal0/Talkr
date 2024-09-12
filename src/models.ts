@@ -1,6 +1,7 @@
+import { PropsWithChildren } from "react";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface TProps {
-  children: React.ReactNode;
+export interface TProps extends PropsWithChildren {
   languages: Record<string, any>;
   defaultLanguage: string;
   detectBrowserLanguage?: boolean;
@@ -32,7 +33,12 @@ export type KeyPath<T> = (
   ? Extract<D, string>
   : never;
 
-export type TParams = { count?: number; [key: string]: any };
+export type TParams = Record<string, any> & {
+  count?: number;
+  gender?: "m" | "f";
+  listType?: "conjunction" | "disjunction";
+  listStyle?: "long" | "narrow";
+};
 
 export type Autocomplete<schema> = KeyPath<schema>;
 
