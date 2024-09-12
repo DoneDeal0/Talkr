@@ -44,7 +44,6 @@ export function tr<Key extends string, Params extends TParams>(
     return (result = result[k]);
   });
   if (Array.isArray(result)) {
-    console.log("IS ARRAY", result);
     return getList(result, locale, params as Params);
   }
   if (typeof result === "string") {
@@ -55,6 +54,6 @@ export function tr<Key extends string, Params extends TParams>(
           .join("")
       : result;
   }
-  //console.warn(`Talkr: Missing translation for ${key}`);
+  console.warn(`Talkr: Missing translation for ${key}`);
   return "";
 }

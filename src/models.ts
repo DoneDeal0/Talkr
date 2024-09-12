@@ -24,11 +24,13 @@ type DynamicSuffix = Partial<Record<Suffix, string>>;
 export type KeyPath<T> = (
   T extends DynamicSuffix
     ? ""
-    : T extends object
-      ? {
-          [K in Exclude<keyof T, symbol>]: `${K}${KeyPrefix<KeyPath<T[K]>>}`;
-        }[Exclude<keyof T, symbol>]
-      : ""
+    : T extends Array<any>
+      ? ""
+      : T extends object
+        ? {
+            [K in Exclude<keyof T, symbol>]: `${K}${KeyPrefix<KeyPath<T[K]>>}`;
+          }[Exclude<keyof T, symbol>]
+        : ""
 ) extends infer D
   ? Extract<D, string>
   : never;
