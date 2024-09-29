@@ -24,7 +24,17 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache-dependency-path: package-lock.json
 
+      - name: Retrieve dependencies
+        id: "modules_cache"
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            node-modules-${{ runner.os }}-
+
       - name: Install dependencies
+        if: steps.modules_cache.outputs.cache-hit != 'true'
         run: npm install
 
       - name: Run typescript
